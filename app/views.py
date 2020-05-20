@@ -38,3 +38,18 @@ def todo_put_delete(request, pk):
     elif request.method == 'DELETE':
         todo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
+from .models import Produtos
+from .serializers import ProdutoSerializes
+from rest_framework import generics
+
+
+class ProdutosTodos(generics.ListCreateAPIView):
+    queryset = Produtos.objects.all()
+    serializer_class = ProdutoSerializes
+    
+    
+class ProdutosDetalhado(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Produtos.objects.all()
+    serializer_class = ProdutoSerializes
